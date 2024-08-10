@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+
+    /// State to present Quiz view
+    @State private var isQuizPresented = false
+
     /// State to present About view
     @State private var isAboutPresented = false
 
@@ -24,6 +27,9 @@ struct HomeView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.red)
+        .fullScreenCover(isPresented: $isQuizPresented) {
+            QuizView()
+        }
         .fullScreenCover(isPresented: $isAboutPresented) {
             AboutView()
         }
@@ -43,7 +49,7 @@ private extension HomeView {
 
     var quizButton: some View {
         Button("START THE QUIZ") {
-            print("go to quiz")
+            isQuizPresented.toggle()
         }
     }
     
