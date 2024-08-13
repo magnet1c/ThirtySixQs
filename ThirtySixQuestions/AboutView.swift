@@ -25,7 +25,7 @@ struct AboutView: View {
         VStack {
             navigationBar
             scrollingText
-                .padding([.leading, .trailing], 16)
+                .padding([.leading, .trailing], .xLarge)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.yellow)
@@ -40,11 +40,12 @@ private extension AboutView {
         ZStack {
             Text("About")
                 .font(.titleFont)
-                .frame(height: 44)
+                .frame(height: 48)
             HStack {
                 CloseButton {
                     dismiss()
                 }
+                .padding(.leading, .medium)
                 Spacer()
             }
         }

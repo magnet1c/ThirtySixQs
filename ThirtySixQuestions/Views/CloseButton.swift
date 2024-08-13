@@ -15,12 +15,16 @@ struct CloseButton: View {
 
     var body: some View {
         Button(action: action) {
-            IconImage()
-                .frame(width: 44, height: 44)
-                .contentShape(Rectangle())
+            ZStack {
+                Circle()
+                    .frame(width: 36, height: 36)
+                    .foregroundStyle(Color.white.opacity(0.75))
+                    .shadow(radius: 5)
+                IconImage(size: 16, weight: .heavy)
+                    .foregroundStyle(Color.black)
+            }
         }
-        .buttonStyle(.plain)
-        .foregroundStyle(.primary)
+        .buttonStyle(PlainButtonStyle())
     }
 }
 
@@ -30,7 +34,7 @@ struct IconImage: View {
     var weight: Font.Weight = .medium
 
     var body: some View {
-        Image(systemName: "xmark.circle.fill")
+        Image(systemName: "xmark")
             .font(.system(size: size, weight: weight))
             .frame(width: 8, height: 8)
     }
