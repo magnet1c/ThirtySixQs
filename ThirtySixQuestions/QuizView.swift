@@ -23,9 +23,10 @@ struct QuizView: View {
 
     // State to trigger the fade animation
     @State private var fadeAnimation = true
-    
-    // State to track the inverted rotation
-    @State private var invertQuestion = false
+
+    var isEvenQuestion: Bool {
+        questionIndex.isMultiple(of: 2)
+    }
 
     var body: some View {
         VStack(spacing: .medium) {
@@ -47,7 +48,7 @@ private extension QuizView {
    
     var questionlabel: some View {
         Text(questions[questionIndex])
-            .rotationEffect(invertQuestion ? .degrees(-180) : .degrees(0))
+            .rotationEffect(isEvenQuestion ? .degrees(0) : .degrees(-180))
             .font(.bodyFont)
             .opacity(fadeAnimation ? 1 : 0)
             .animation(.easeInOut(duration: 0.5), value: fadeAnimation)
@@ -92,7 +93,6 @@ private extension QuizView {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  // Wait for fade out to complete
             questionIndex -= 1
-            invertQuestion.toggle()
 
             withAnimation {
                 fadeAnimation = true  // Start fading in
@@ -112,7 +112,6 @@ private extension QuizView {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // Wait for fade out to complete
             questionIndex += 1
-            invertQuestion.toggle()
 
             withAnimation {
                 fadeAnimation = true  // Start fading in
