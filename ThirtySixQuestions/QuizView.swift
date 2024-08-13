@@ -18,11 +18,14 @@ struct QuizView: View {
         "Who wrote 'To Kill a Mockingbird'?"
     ]
 
-    // State variable to track the current question index
+    // State to track the current question index
     @State private var questionIndex = 0
 
-    // State variable to trigger the fade animation
+    // State to trigger the fade animation
     @State private var fadeAnimation = true
+    
+    // State to track the inverted rotation
+    @State private var invertQuestion = false
 
     var body: some View {
         VStack(spacing: .medium) {
@@ -44,6 +47,7 @@ private extension QuizView {
    
     var questionlabel: some View {
         Text(questions[questionIndex])
+            .rotationEffect(invertQuestion ? .degrees(-180) : .degrees(0))
             .font(.bodyFont)
             .opacity(fadeAnimation ? 1 : 0)
             .animation(.easeInOut(duration: 0.5), value: fadeAnimation)
@@ -88,6 +92,8 @@ private extension QuizView {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  // Wait for fade out to complete
             questionIndex -= 1
+            invertQuestion.toggle()
+
             withAnimation {
                 fadeAnimation = true  // Start fading in
             }
@@ -103,8 +109,11 @@ private extension QuizView {
         withAnimation {
             fadeAnimation = false  // Start fading out
         }
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // Wait for fade out to complete
             questionIndex += 1
+            invertQuestion.toggle()
+
             withAnimation {
                 fadeAnimation = true  // Start fading in
             }
