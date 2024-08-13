@@ -19,16 +19,22 @@ struct HomeView: View {
     @State private var isShareSheetPresented = false
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             logoView
+            Spacer()
             quizButton
             aboutButton
+                .frame(maxWidth: .infinity)
             tellAFriendButton
+                .frame(maxWidth: .infinity)
         }
+        .padding(.xLarge)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.red)
         .fullScreenCover(isPresented: $isQuizPresented) {
-            QuizView()
+            NavigationView {
+                QuizInstructionsView()
+            }
         }
         .fullScreenCover(isPresented: $isAboutPresented) {
             AboutView()
@@ -44,25 +50,58 @@ struct HomeView: View {
 private extension HomeView {
     
     var logoView: some View {
-        Text("36")
+        Image("36-questions-logo")
+            .resizable()
+            .scaledToFit()
+            .frame(height: 240)
     }
 
     var quizButton: some View {
-        Button("START THE QUIZ") {
+        Button(action: {
             isQuizPresented.toggle()
+        }) {
+            Text("START QUIZ")
+                .font(.headline)
+                .foregroundColor(.black)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.white.opacity(0.75))
         }
+        .clipShape(Capsule())
+        .shadow(radius: 5)
     }
     
     var aboutButton: some View {
-        Button("ABOUT") {
+        Button(action: {
             isAboutPresented.toggle()
+        }) {
+            Text("ABOUT")
+                .font(.headline)
+                .foregroundColor(.black)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.white.opacity(0.75))
         }
+        .clipShape(Capsule())
+        .shadow(radius: 5)
     }
     
     var tellAFriendButton: some View {
-        Button("TELL A FRIEND") {
+//        Button("TELL A FRIEND") {
+//            isShareSheetPresented.toggle()
+//        }
+        Button(action: {
             isShareSheetPresented.toggle()
+        }) {
+            Text("TELL A FRIEND")
+                .font(.headline)
+                .foregroundColor(.black)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.white.opacity(0.75))
         }
+        .clipShape(Capsule())
+        .shadow(radius: 5)
     }
     
     var shareSheet: some View {
