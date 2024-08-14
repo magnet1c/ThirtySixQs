@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+struct VisualEffectView: UIViewRepresentable {
+    var effect: UIVisualEffect?
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
+}
+
 struct HomeView: View {
 
     /// State to present Quiz view
@@ -19,16 +25,22 @@ struct HomeView: View {
     @State private var isShareSheetPresented = false
 
     var body: some View {
-        VStack(alignment: .leading) {
-            logoView
-            Spacer()
-            quizButton
-            aboutButton
-                .frame(maxWidth: .infinity)
-            tellAFriendButton
-                .frame(maxWidth: .infinity)
+        ZStack {
+            // Draw some backgorund view here to be blurred
+            VisualEffectView(effect: UIBlurEffect(style: .light))
+                .edgesIgnoringSafeArea(.all)
+            VStack(alignment: .leading) {
+                logoView
+                Spacer()
+                quizButton
+                aboutButton
+                    .frame(maxWidth: .infinity)
+                tellAFriendButton
+                    .frame(maxWidth: .infinity)
+            }
+            .padding(.xLarge)
         }
-        .padding(.xLarge)
+        
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.red)
         .fullScreenCover(isPresented: $isQuizPresented) {
