@@ -10,16 +10,18 @@ import SwiftUI
 struct QuizInstructionsView: View {
     
     var body: some View {
-        VStack(spacing: .medium) {
-            titleLabel
-            instructionsLabel
-            Spacer()
-                .frame(height: .small)
-            startButton
+        NavigationStack {
+            VStack(spacing: .medium) {
+                titleLabel
+                instructionsLabel
+                Spacer()
+                    .frame(height: .small)
+                startButton
+            }
+            .padding(.xLarge)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.green)
         }
-        .padding(.xLarge)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.green)
     }
 }
 

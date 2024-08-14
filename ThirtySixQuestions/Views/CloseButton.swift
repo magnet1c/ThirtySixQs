@@ -20,7 +20,7 @@ struct CloseButton: View {
                     .frame(width: 36, height: 36)
                     .foregroundStyle(Color.white.opacity(0.75))
                     .shadow(radius: 5)
-                IconImage(size: 16, weight: .heavy)
+                IconImage(icon: .close, size: 16, weight: .heavy)
                     .foregroundStyle(Color.black)
             }
         }
@@ -28,13 +28,19 @@ struct CloseButton: View {
     }
 }
 
+enum Icon: String {
+    case close = "xmark"
+    case back = "arrow.backward"
+}
+
 struct IconImage: View {
 
-    var size: CGFloat = 26
-    var weight: Font.Weight = .medium
+    let icon: Icon
+    var size: CGFloat = 16
+    var weight: Font.Weight = .heavy
 
     var body: some View {
-        Image(systemName: "xmark")
+        Image(systemName: icon.rawValue)
             .font(.system(size: size, weight: weight))
             .frame(width: 8, height: 8)
     }

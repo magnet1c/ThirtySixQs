@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuizView: View {
     
-    @Environment(\.dismiss) var dismiss
+    @State private var isQuizComplete = false
 
     let questions = [
         "What is the capital of France?",
@@ -41,6 +41,9 @@ struct QuizView: View {
         .background(Color.purple)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .navigationDestination(isPresented: $isQuizComplete) {
+            QuizCompleteView()
+        }
     }
 }
 
@@ -56,26 +59,34 @@ private extension QuizView {
     
     var backButton: some View {
         Button(action: didTapBackButton) {
-            Text("Back")
-                .font(.headline)
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.gray)
-                .cornerRadius(10)
+            ZStack {
+                Circle()
+                    .frame(width: 48, height: 48)
+                    .foregroundStyle(Color.white.opacity(0.75))
+                    .shadow(radius: 5)
+                IconImage(icon: .back, size: 16, weight: .heavy)
+                    .foregroundStyle(Color.black)
+            }
         }
+        .buttonStyle(PlainButtonStyle())
         .disabled(questionIndex == 0)
+        .opacity(questionIndex == 0 ? 0 : 1)
     }
     
     var nextButton: some View {
         Button(action: didTapNextButton) {
-            Text("Next")
+            Text("NEXT")
                 .font(.headline)
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.blue)
-                .cornerRadius(10)
+                .foregroundColor(.black)
+                .padding([.leading, .trailing], .medium)
+                .frame(height: 48)
+                .background(Color.white.opacity(0.75))
+                
         }
-        .disabled(questionIndex == questions.count - 1)
+        .buttonStyle(PlainButtonStyle())
+        .clipShape(Capsule())
+        .shadow(radius: 5)
+        .disabled(questionIndex == questions.count)
     }
 }
 
@@ -103,6 +114,7 @@ private extension QuizView {
     func didTapNextButton() {
 
         guard questionIndex < questions.count - 1 else {
+            isQuizComplete.toggle()
             return
         }
 
