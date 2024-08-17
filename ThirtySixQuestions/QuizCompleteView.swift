@@ -64,7 +64,7 @@ private extension QuizCompleteView {
     }
     
     var instructionsLabel: some View {
-        Text("You've reached the end of the questions. The final test is tp stare into your partners eyes for four minutes. It's important to finish with this step. Some people have described this step as thrilling and terrifying. Good luck...")
+        Text("You've reached the end of the questions. The final test is to stare into your partners eyes for four minutes. It's important to finish with this step. Some people have described this step as thrilling and terrifying. Good luck...")
             .font(.bodyFont)
             .multilineTextAlignment(.center)
     }

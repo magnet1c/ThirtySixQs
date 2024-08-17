@@ -68,11 +68,26 @@ struct QuizView: View {
     }
 
     var body: some View {
-        VStack(spacing: .medium) {
-            questionlabel
-            HStack {
-                backButton
-                nextButton
+        ZStack {
+            
+            // Question number + nav buttons
+            VStack {
+                HStack {
+                    questionNumberlabel
+                    Spacer()
+                }
+                Spacer()
+                HStack(spacing: .medium) {
+                    if questionIndex != 0 {
+                        backButton
+                    }
+                    nextButton
+                }
+            }
+            
+            // Question
+            if questionIndex >= 0 && questionIndex < questions.count {
+                questionlabel
             }
         }
         .padding(.xLarge)
@@ -87,12 +102,20 @@ struct QuizView: View {
 }
 
 private extension QuizView {
-   
+
+    var questionNumberlabel: some View {
+        Text("\(questionIndex+1)")
+            .foregroundStyle(.black.opacity(0.25))
+            .font(.titleFont)
+            .opacity(fadeAnimation ? 1 : 0)
+            //.animation(.easeInOut(duration: 0.5), value: fadeAnimation)
+    }
+
     var questionlabel: some View {
         Text(questions[questionIndex])
             .foregroundStyle(.black)
-            .rotationEffect(isEvenQuestion ? .degrees(0) : .degrees(-180))
-            .font(.bodyFont)
+            .multilineTextAlignment(.center)
+            .font(.titleFont)
             .opacity(fadeAnimation ? 1 : 0)
             .animation(.easeInOut(duration: 0.5), value: fadeAnimation)
     }
@@ -109,8 +132,8 @@ private extension QuizView {
             }
         }
         .buttonStyle(PlainButtonStyle())
-        .disabled(questionIndex == 0)
-        .opacity(questionIndex == 0 ? 0 : 1)
+        .disabled(questionIndex <= 0)
+        .opacity(questionIndex <= 0 ? 0 : 1)
     }
     
     var nextButton: some View {
@@ -118,7 +141,7 @@ private extension QuizView {
             Text("NEXT")
                 .font(.headline)
                 .foregroundColor(.black)
-                .padding([.leading, .trailing], .medium)
+                .padding([.leading, .trailing], .large)
                 .frame(height: 48)
                 .background(Color.white.opacity(0.75))
                 
@@ -137,7 +160,7 @@ private extension QuizView {
         guard questionIndex > 0 else {
             return
         }
-        
+
         withAnimation {
             fadeAnimation = false  // Start fading out
         }
