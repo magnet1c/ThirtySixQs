@@ -67,16 +67,33 @@ struct QuizView: View {
     var body: some View {
         ZStack {
             
-            // Question number + nav buttons
+            // Question number
             VStack {
                 HStack {
                     questionNumberlabel
                     Spacer()
                 }
                 Spacer()
-                HStack(spacing: .medium) {
-                    backButton
-                    nextButton
+                //HStack(spacing: .medium) {
+                //    backButton
+                //    Spacer()
+                    //nextButton
+                //}
+            }
+            
+            // Nav buttons
+            VStack {
+                Spacer()
+                ZStack {
+                    HStack(spacing: .medium) {
+                        backButton
+                        Spacer()
+                    }
+                    HStack(spacing: .medium) {
+                        Spacer()
+                        nextButton
+                        Spacer()
+                    }
                 }
             }
             
@@ -85,7 +102,8 @@ struct QuizView: View {
                 questionLabel
             }
         }
-        .padding(.xLarge)
+        .padding([.leading, .trailing], .xLarge)
+        .padding([.top, .bottom], .medium)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.purple)
         .navigationBarHidden(true)
@@ -118,29 +136,27 @@ private extension QuizView {
             ZStack {
                 Circle()
                     .frame(width: 48, height: 48)
-                    .foregroundStyle(Color.white.opacity(0.75))
-                    .shadow(radius: 5)
+                    .foregroundStyle(
+                        LinearGradient(
+                            gradient: Gradient(colors: [Color.white.opacity(0.7), Color.white.opacity(0.9)]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
                 IconImage(icon: .back, size: 16, weight: .heavy)
                     .foregroundStyle(Color.black)
             }
         }
+        .overlay(
+            Circle()
+                .stroke(Color.white, lineWidth: 1)
+        )
         .buttonStyle(PlainButtonStyle())
     }
     
     var nextButton: some View {
-        Button(action: didTapNextButton) {
-            Text("NEXT")
-                .font(.buttonFont)
-                .foregroundColor(.black)
-                .padding([.leading, .trailing], .large)
-                .frame(height: 48)
-                .background(Color.white.opacity(0.75))
-                
-        }
-        .buttonStyle(PlainButtonStyle())
-        .clipShape(Capsule())
-        .shadow(radius: 5)
-        .disabled(questionIndex == questions.count)
+        TextButton(title: "NEXT", action: didTapNextButton)
+            .disabled(questionIndex == questions.count)
     }
 }
 

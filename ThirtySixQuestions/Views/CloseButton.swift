@@ -18,12 +18,21 @@ struct CloseButton: View {
             ZStack {
                 Circle()
                     .frame(width: 36, height: 36)
-                    .foregroundStyle(Color.white.opacity(0.75))
-                    .shadow(radius: 5)
+                    .foregroundStyle(
+                        LinearGradient(
+                            gradient: Gradient(colors: [Color.white.opacity(0.7), Color.white.opacity(0.9)]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
                 IconImage(icon: .close, size: 16, weight: .heavy)
                     .foregroundStyle(Color.black)
             }
         }
+        .overlay(
+            Circle()
+                .stroke(Color.white, lineWidth: 1)
+        )
         .buttonStyle(PlainButtonStyle())
     }
 }

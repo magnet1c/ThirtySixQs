@@ -62,7 +62,7 @@ struct QuizCompleteView: View {
 private extension QuizCompleteView {
     
     var titleLabel: some View {
-        Text("Well Done")
+        Text("Well done!")
             .foregroundStyle(.black)
             .font(.titleFont)
     }
@@ -75,19 +75,7 @@ private extension QuizCompleteView {
     }
 
     var startTimeButton: some View {
-        Button(action: didTapStartTimer) {
-            Text("START TIMER")
-                .font(.buttonFont)
-                .foregroundColor(.black)
-                .padding([.leading, .trailing], .large)
-                .padding([.top, .bottom], .medium)
-                .frame(height: 48)
-                .background(Color.white.opacity(0.75))
-                
-        }
-        .buttonStyle(PlainButtonStyle())
-        .clipShape(Capsule())
-        .shadow(radius: 5)
+        TextButton(title: "START TIMER", action: didTapStartTimer)
     }
     
     var skipButton: some View {

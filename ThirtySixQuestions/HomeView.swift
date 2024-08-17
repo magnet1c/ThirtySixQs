@@ -71,54 +71,24 @@ private extension HomeView {
     }
 
     var quizButton: some View {
-        Button(action: {
+        TextButton(title: "START QUIZ", fullWidth: true) {
             hapticsManager.generateSoftHaptic()
             isQuizPresented.toggle()
-        }) {
-            Text("START QUIZ")
-                .font(.buttonFont)
-                .foregroundColor(.black)
-                .padding([.leading, .trailing], .large)
-                .padding([.top, .bottom], .medium)
-                .frame(maxWidth: .infinity)
-                .background(Color.white.opacity(0.75))
         }
-        .clipShape(Capsule())
-        .shadow(radius: 5)
     }
     
     var aboutButton: some View {
-        Button(action: {
+        TextButton(title: "ABOUT", fullWidth: true) {
             hapticsManager.generateSoftHaptic()
             isAboutPresented.toggle()
-        }) {
-            Text("ABOUT")
-                .font(.buttonFont)
-                .foregroundColor(.black)
-                .padding([.leading, .trailing], .large)
-                .padding([.top, .bottom], .medium)
-                .frame(maxWidth: .infinity)
-                .background(Color.white.opacity(0.75))
         }
-        .clipShape(Capsule())
-        .shadow(radius: 5)
     }
     
     var tellAFriendButton: some View {
-        Button(action: {
+        TextButton(title: "TELL A FRIEND", fullWidth: true) {
             hapticsManager.generateSoftHaptic()
             isShareSheetPresented.toggle()
-        }) {
-            Text("TELL A FRIEND")
-                .font(.buttonFont)
-                .foregroundColor(.black)
-                .padding([.leading, .trailing], .large)
-                .padding([.top, .bottom], .medium)
-                .frame(maxWidth: .infinity)
-                .background(Color.white.opacity(0.75))
         }
-        .clipShape(Capsule())
-        .shadow(radius: 5)
     }
     
     var shareSheet: some View {

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct QuizInstructionsView: View {
     
+    @State private var startQuiz = false
+
     private let hapticsManager = HapticsManager()
 
     var body: some View {
@@ -23,6 +25,9 @@ struct QuizInstructionsView: View {
             .padding(.xLarge)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.green)
+            .navigationDestination(isPresented: $startQuiz) {
+                QuizView()
+            }
         }
     }
 }
@@ -45,16 +50,20 @@ private extension QuizInstructionsView {
     }
     
     var startButton: some View {
-        NavigationLink(destination: QuizView()) {
-            Text("WE'RE READY")
-                .font(.buttonFont)
-                .foregroundColor(.black)
-                .padding([.leading, .trailing], .large)
-                .padding([.top, .bottom], .medium)
-                .background(Color.white.opacity(0.75))
-                .clipShape(Capsule())
-                .shadow(radius: 5)
+        TextButton(title: "WE'RE READY") {
+            hapticsManager.generateSoftHaptic()
+            startQuiz.toggle()
         }
+//        NavigationLink(destination: QuizView()) {
+//            Text("WE'RE READY")
+//                .font(.buttonFont)
+//                .foregroundColor(.black)
+//                .padding([.leading, .trailing], .large)
+//                .padding([.top, .bottom], .medium)
+//                .background(Color.white.opacity(0.75))
+//                .clipShape(Capsule())
+//                .shadow(radius: 5)
+//        }
     }
 }
 
