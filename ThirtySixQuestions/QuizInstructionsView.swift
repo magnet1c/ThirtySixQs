@@ -9,6 +9,8 @@ import SwiftUI
 
 struct QuizInstructionsView: View {
     
+    private let hapticsManager = HapticsManager()
+
     var body: some View {
         NavigationStack {
             VStack(spacing: .medium) {

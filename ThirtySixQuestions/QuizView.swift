@@ -14,8 +14,7 @@ struct QuizView: View {
 //    let questions = [
 //        "What is the capital of France?",
 //        "What is 2 + 2?",
-//        "What is the color of the sky?",
-//        "Who wrote 'To Kill a Mockingbird'?"
+//        "What is the color of the sky?"
 //    ]
     
     let questions = [
@@ -63,9 +62,7 @@ struct QuizView: View {
     // State to trigger the fade animation
     @State private var fadeAnimation = true
 
-    var isEvenQuestion: Bool {
-        questionIndex.isMultiple(of: 2)
-    }
+    private let hapticsManager = HapticsManager()
 
     var body: some View {
         ZStack {
@@ -78,9 +75,7 @@ struct QuizView: View {
                 }
                 Spacer()
                 HStack(spacing: .medium) {
-                    if questionIndex != 0 {
-                        backButton
-                    }
+                    backButton
                     nextButton
                 }
             }
@@ -107,8 +102,6 @@ private extension QuizView {
         Text("\(questionIndex+1)")
             .foregroundStyle(.black.opacity(0.25))
             .font(.titleFont)
-            .opacity(fadeAnimation ? 1 : 0)
-            //.animation(.easeInOut(duration: 0.5), value: fadeAnimation)
     }
 
     var questionlabel: some View {
@@ -132,8 +125,6 @@ private extension QuizView {
             }
         }
         .buttonStyle(PlainButtonStyle())
-        .disabled(questionIndex <= 0)
-        .opacity(questionIndex <= 0 ? 0 : 1)
     }
     
     var nextButton: some View {
@@ -157,39 +148,51 @@ private extension QuizView {
     
     func didTapBackButton() {
 
+        hapticsManager.generateSoftHaptic()
+
         guard questionIndex > 0 else {
+            guard let window = UIApplication.shared.windows.first else { return }
+            window.rootViewController?.dismiss(animated: true, completion: nil)
             return
         }
 
+        // Start fading out
         withAnimation {
-            fadeAnimation = false  // Start fading out
+            fadeAnimation = false
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  // Wait for fade out to complete
+        // Wait for fade out to complete
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             questionIndex -= 1
 
+            // Start fading in
             withAnimation {
-                fadeAnimation = true  // Start fading in
+                fadeAnimation = true
             }
         }
     }
     
     func didTapNextButton() {
 
+        hapticsManager.generateSoftHaptic()
+
         guard questionIndex < questions.count - 1 else {
             isQuizComplete.toggle()
             return
         }
 
+        // Start fading out
         withAnimation {
-            fadeAnimation = false  // Start fading out
+            fadeAnimation = false
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // Wait for fade out to complete
+        // Wait for fade out to complete
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             questionIndex += 1
 
+            // Start fading in
             withAnimation {
-                fadeAnimation = true  // Start fading in
+                fadeAnimation = true
             }
         }
     }

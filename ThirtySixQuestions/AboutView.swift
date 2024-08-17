@@ -11,6 +11,8 @@ struct AboutView: View {
     
     @Environment(\.dismiss) var dismiss
 
+    private let hapticsManager = HapticsManager()
+
     let aboutText = """
     On the 9th of January 2015, Mandy Len Catron published an essay in The New York Times describing her experience replicating a study that claims to accelerate intimacy between two people.
 
@@ -44,10 +46,8 @@ private extension AboutView {
                 .font(.titleFont)
                 .frame(height: 48)
             HStack {
-                CloseButton {
-                    dismiss()
-                }
-                .padding(.leading, .medium)
+                CloseButton(action: didTapCloseButton)
+                    .padding(.leading, .medium)
                 Spacer()
             }
         }
@@ -62,6 +62,16 @@ private extension AboutView {
                 .padding([.top, .bottom], .large)
                 .padding([.leading, .trailing], .xLarge)
         }
+    }
+}
+
+// MARK: - Actions
+
+private extension AboutView {
+ 
+    func didTapCloseButton() {
+        hapticsManager.generateSoftHaptic()
+        dismiss()
     }
 }
 

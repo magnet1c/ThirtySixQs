@@ -24,6 +24,8 @@ struct HomeView: View {
     /// State to present share sheet
     @State private var isShareSheetPresented = false
 
+    private let hapticsManager = HapticsManager()
+
     var body: some View {
         ZStack {
             // Draw some backgorund view here to be blurred
@@ -70,6 +72,7 @@ private extension HomeView {
 
     var quizButton: some View {
         Button(action: {
+            hapticsManager.generateSoftHaptic()
             isQuizPresented.toggle()
         }) {
             Text("START QUIZ")
@@ -85,6 +88,7 @@ private extension HomeView {
     
     var aboutButton: some View {
         Button(action: {
+            hapticsManager.generateSoftHaptic()
             isAboutPresented.toggle()
         }) {
             Text("ABOUT")
@@ -99,10 +103,8 @@ private extension HomeView {
     }
     
     var tellAFriendButton: some View {
-//        Button("TELL A FRIEND") {
-//            isShareSheetPresented.toggle()
-//        }
         Button(action: {
+            hapticsManager.generateSoftHaptic()
             isShareSheetPresented.toggle()
         }) {
             Text("TELL A FRIEND")
