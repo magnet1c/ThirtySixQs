@@ -26,12 +26,16 @@ struct AboutView: View {
     """
 
     var body: some View {
-        VStack {
-            navigationBar
-            scrollingText
+        ZStack {
+            blurryBackgroundView
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            VStack {
+                navigationBar
+                scrollingText
+            }
+            //.frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.yellow)
+        .background(Color.background)
     }
 }
 
@@ -50,6 +54,7 @@ private extension AboutView {
                     .padding(.leading, .medium)
                 Spacer()
             }
+            .padding(.leading, .medium)
         }
         .frame(maxWidth: .infinity)
     }
@@ -61,6 +66,29 @@ private extension AboutView {
                 .font(.bodyFont)
                 .padding([.top, .bottom], .large)
                 .padding([.leading, .trailing], .xLarge)
+        }
+    }
+    
+    var blurryBackgroundView: some View {
+        ZStack {
+            Circle()
+                .fill(Color.accent1)
+                .frame(width: 370, height: 340)
+                .opacity(0.6)
+                .offset(x: -110)
+                .offset(y: 20)
+                .rotationEffect(.degrees(45))
+                .blur(radius: 90)
+            Circle()
+                .fill(Color.accent2)
+                .frame(width: 420, height: 400)
+                .opacity(0.9)
+                .offset(x: 150)
+                .offset(y: -80)
+                .rotationEffect(.degrees(90))
+                .blur(radius: 90)
+            VisualEffectView(effect: UIBlurEffect(style: .light))
+                .edgesIgnoringSafeArea(.all)
         }
     }
 }

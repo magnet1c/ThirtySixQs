@@ -21,6 +21,7 @@
 		D5360B9C2C6D453C00CBE5DB /* QuizCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5360B9B2C6D453C00CBE5DB /* QuizCompleteView.swift */; };
 		D5360B9E2C70F69000CBE5DB /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5360B9D2C70F69000CBE5DB /* HapticsManager.swift */; };
 		D5360BA02C711DA700CBE5DB /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5360B9F2C711DA700CBE5DB /* TextButton.swift */; };
+		D5360BA22C71284E00CBE5DB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5360BA12C71284E00CBE5DB /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		D5360B9B2C6D453C00CBE5DB /* QuizCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCompleteView.swift; sourceTree = "<group>"; };
 		D5360B9D2C70F69000CBE5DB /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		D5360B9F2C711DA700CBE5DB /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
+		D5360BA12C71284E00CBE5DB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				D5360B932C67FFB400CBE5DB /* CloseButton.swift */,
 				D5360B9F2C711DA700CBE5DB /* TextButton.swift */,
 				D5360B952C68016100CBE5DB /* Font.swift */,
+				D5360BA12C71284E00CBE5DB /* Color.swift */,
 				D5360B992C6BE2AC00CBE5DB /* Size.swift */,
 				D5360B9D2C70F69000CBE5DB /* HapticsManager.swift */,
 			);
@@ -179,6 +182,7 @@
 				D5360B982C6BDD9C00CBE5DB /* QuizInstructionsView.swift in Sources */,
 				D5360B8B2C67C25E00CBE5DB /* AboutView.swift in Sources */,
 				D5360B892C67C18B00CBE5DB /* HomeView.swift in Sources */,
+				D5360BA22C71284E00CBE5DB /* Color.swift in Sources */,
 				D5360B8D2C67C3DA00CBE5DB /* QuizView.swift in Sources */,
 				D5360B9E2C70F69000CBE5DB /* HapticsManager.swift in Sources */,
 				D5360B9C2C6D453C00CBE5DB /* QuizCompleteView.swift in Sources */,

@@ -15,16 +15,19 @@ struct QuizInstructionsView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: .medium) {
-                titleLabel
-                instructionsLabel
-                Spacer()
-                    .frame(height: .small)
-                startButton
+            ZStack {
+                blurryBackgroundView
+                VStack(spacing: .medium) {
+                    titleLabel
+                    instructionsLabel
+                    Spacer()
+                        .frame(height: .xxSmall)
+                    startButton
+                }
+                .padding([.leading, .trailing], .xxLarge)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .padding(.xLarge)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.green)
+            .background(Color.background)
             .navigationDestination(isPresented: $startQuiz) {
                 QuizView()
             }
@@ -54,16 +57,29 @@ private extension QuizInstructionsView {
             hapticsManager.generateSoftHaptic()
             startQuiz.toggle()
         }
-//        NavigationLink(destination: QuizView()) {
-//            Text("WE'RE READY")
-//                .font(.buttonFont)
-//                .foregroundColor(.black)
-//                .padding([.leading, .trailing], .large)
-//                .padding([.top, .bottom], .medium)
-//                .background(Color.white.opacity(0.75))
-//                .clipShape(Capsule())
-//                .shadow(radius: 5)
-//        }
+    }
+    
+    var blurryBackgroundView: some View {
+        ZStack {
+            Circle()
+                .fill(Color.accent1)
+                .frame(width: 370, height: 340)
+                .opacity(0.6)
+                .offset(x: -110)
+                .offset(y: 20)
+                .rotationEffect(.degrees(45))
+                .blur(radius: 90)
+            Circle()
+                .fill(Color.accent2)
+                .frame(width: 420, height: 400)
+                .opacity(0.9)
+                .offset(x: 150)
+                .offset(y: -80)
+                .rotationEffect(.degrees(90))
+                .blur(radius: 90)
+            VisualEffectView(effect: UIBlurEffect(style: .light))
+                .edgesIgnoringSafeArea(.all)
+        }
     }
 }
 

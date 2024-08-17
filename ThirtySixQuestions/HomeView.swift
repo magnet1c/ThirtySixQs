@@ -26,12 +26,15 @@ struct HomeView: View {
 
     private let hapticsManager = HapticsManager()
 
+    @State private var accent1Angle: Double = 0
+    @State private var accent2Angle: Double = 0
+
     var body: some View {
         ZStack {
-            // Draw some backgorund view here to be blurred
-            VisualEffectView(effect: UIBlurEffect(style: .light))
-                .edgesIgnoringSafeArea(.all)
-            VStack(alignment: .leading) {
+
+            blurryBackgroundView
+            
+            VStack(alignment: .leading, spacing: .medium) {
                 logoView
                 Spacer()
                 quizButton
@@ -44,7 +47,7 @@ struct HomeView: View {
         }
         
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.red)
+        .background(Color.background)
         .fullScreenCover(isPresented: $isQuizPresented) {
             NavigationView {
                 QuizInstructionsView()
@@ -68,6 +71,40 @@ private extension HomeView {
             .resizable()
             .scaledToFit()
             .frame(height: 240)
+    }
+
+    var blurryBackgroundView: some View {
+        ZStack {
+            Circle()
+                .fill(Color.accent1)
+                .frame(width: 370, height: 340)
+                .opacity(0.8)
+                .offset(x: -110)
+                .offset(y: 20)
+                .rotationEffect(.degrees(accent1Angle))
+                .onAppear {
+                    withAnimation(Animation.linear(duration: 30).repeatForever(autoreverses: false)) {
+                        accent1Angle = 360
+                    }
+                }
+                .blur(radius: 90)
+            
+            Circle()
+                .fill(Color.accent2)
+                .frame(width: 420, height: 400)
+                .opacity(0.8)
+                .offset(x: 150)
+                .offset(y: -80)
+                .rotationEffect(.degrees(accent2Angle))
+                .onAppear {
+                    withAnimation(Animation.linear(duration: 32).repeatForever(autoreverses: false)) {
+                        accent2Angle = 360
+                    }
+                }
+                .blur(radius: 90)
+            //VisualEffectView(effect: UIBlurEffect(style: .light))
+                //.edgesIgnoringSafeArea(.all)
+        }
     }
 
     var quizButton: some View {

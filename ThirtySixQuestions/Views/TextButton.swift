@@ -25,7 +25,7 @@ struct TextButton: View {
                 }
                 .background(
                     LinearGradient(
-                        gradient: Gradient(colors: [Color.white.opacity(0.7), Color.white.opacity(0.9)]),
+                        gradient: Gradient(colors: [Color.white.opacity(0.64), Color.white.opacity(0.85)]),
                         startPoint: .top,
                         endPoint: .bottom
                     )
