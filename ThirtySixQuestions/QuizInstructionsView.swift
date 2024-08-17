@@ -35,7 +35,7 @@ private extension QuizInstructionsView {
     }
     
     var instructionsLabel: some View {
-        Text("Sit opposite your partner with your device between you. Take turns reading one question aloud to your partner, thn both of you answer. There is no time limit, be honest and truthful.")
+        Text("Sit opposite your partner with your device between you. Take turns reading one question aloud to your partner, then both of you answer. There is no time limit, be honest and truthful.")
             .font(.bodyFont)
             .multilineTextAlignment(.center)
     }
