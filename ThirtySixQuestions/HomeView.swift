@@ -76,9 +76,10 @@ private extension HomeView {
             isQuizPresented.toggle()
         }) {
             Text("START QUIZ")
-                .font(.headline)
+                .font(.buttonFont)
                 .foregroundColor(.black)
-                .padding()
+                .padding([.leading, .trailing], .large)
+                .padding([.top, .bottom], .medium)
                 .frame(maxWidth: .infinity)
                 .background(Color.white.opacity(0.75))
         }
@@ -92,9 +93,10 @@ private extension HomeView {
             isAboutPresented.toggle()
         }) {
             Text("ABOUT")
-                .font(.headline)
+                .font(.buttonFont)
                 .foregroundColor(.black)
-                .padding()
+                .padding([.leading, .trailing], .large)
+                .padding([.top, .bottom], .medium)
                 .frame(maxWidth: .infinity)
                 .background(Color.white.opacity(0.75))
         }
@@ -108,9 +110,10 @@ private extension HomeView {
             isShareSheetPresented.toggle()
         }) {
             Text("TELL A FRIEND")
-                .font(.headline)
+                .font(.buttonFont)
                 .foregroundColor(.black)
-                .padding()
+                .padding([.leading, .trailing], .large)
+                .padding([.top, .bottom], .medium)
                 .frame(maxWidth: .infinity)
                 .background(Color.white.opacity(0.75))
         }

@@ -34,11 +34,11 @@ private extension QuizInstructionsView {
     var titleLabel: some View {
         Text("Instructions")
             .foregroundStyle(.black)
-            .font(.title)
+            .font(.titleFont)
     }
     
     var instructionsLabel: some View {
-        Text("Sit opposite your partner with your device between you. Take turns reading one question aloud to your partner, then both of you answer. There is no time limit, be honest and truthful.")
+        Text("Sit opposite your partner with your device between you. Take turns reading one question aloud to your partner, then both of you answer.\n\nThere is no time limit, be honest and truthful.")
             .foregroundStyle(.black)
             .font(.bodyFont)
             .multilineTextAlignment(.center)
@@ -47,9 +47,10 @@ private extension QuizInstructionsView {
     var startButton: some View {
         NavigationLink(destination: QuizView()) {
             Text("WE'RE READY")
-                .font(.headline)
+                .font(.buttonFont)
                 .foregroundColor(.black)
-                .padding()
+                .padding([.leading, .trailing], .large)
+                .padding([.top, .bottom], .medium)
                 .background(Color.white.opacity(0.75))
                 .clipShape(Capsule())
                 .shadow(radius: 5)

@@ -13,6 +13,7 @@ struct QuizCompleteView: View {
 
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     private let timerTotalDuration: Int = 30 // 240 seconds = 4 minutes
+    private let hapticsManager = HapticsManager()
 
     @State private var timerIsActive = false
     @State private var counter: Int = 0
@@ -41,7 +42,9 @@ struct QuizCompleteView: View {
                 self.counter += 1
             } 
             
+            // Finished
             if timerIsActive && counter >= timerTotalDuration {
+                hapticsManager.generateHeavyHaptic()
                 timerIsActive = false
                 dismiss()
             }
@@ -60,11 +63,13 @@ private extension QuizCompleteView {
     
     var titleLabel: some View {
         Text("Well Done")
-            .font(.title)
+            .foregroundStyle(.black)
+            .font(.titleFont)
     }
     
     var instructionsLabel: some View {
-        Text("You've reached the end of the questions. The final test is to stare into your partners eyes for four minutes. It's important to finish with this step. Some people have described this step as thrilling and terrifying. Good luck...")
+        Text("You've reached the end of the questions. The final test is to stare into your partners eyes for four minutes.\n\nIt's important to finish with this step. Some people have described this step as thrilling and terrifying. Good luck...")
+            .foregroundStyle(.black)
             .font(.bodyFont)
             .multilineTextAlignment(.center)
     }
@@ -72,9 +77,10 @@ private extension QuizCompleteView {
     var startTimeButton: some View {
         Button(action: didTapStartTimer) {
             Text("START TIMER")
-                .font(.headline)
+                .font(.buttonFont)
                 .foregroundColor(.black)
-                .padding([.leading, .trailing], .medium)
+                .padding([.leading, .trailing], .large)
+                .padding([.top, .bottom], .medium)
                 .frame(height: 48)
                 .background(Color.white.opacity(0.75))
                 
@@ -87,16 +93,12 @@ private extension QuizCompleteView {
     var skipButton: some View {
         Button(action: didTapSkip) {
             Text("SKIP")
-                .font(.headline)
-                .foregroundColor(.black)
-                .padding([.leading, .trailing], .medium)
+                .font(.buttonFont)
+                .foregroundColor(.white)
+                .padding([.leading, .trailing], .large)
                 .frame(height: 48)
-                .background(Color.white.opacity(0.75))
-                
         }
         .buttonStyle(PlainButtonStyle())
-        .clipShape(Capsule())
-        .shadow(radius: 5)
     }
 }
 
@@ -105,10 +107,12 @@ private extension QuizCompleteView {
 private extension QuizCompleteView {
 
     func didTapStartTimer() {
+        hapticsManager.generateSoftHaptic()
         timerIsActive = true
     }
     
     func didTapSkip() {
+        hapticsManager.generateSoftHaptic()
         dismiss()
     }
     
@@ -130,7 +134,7 @@ struct CountdownLabel: View {
     var body: some View {
         VStack {
             Text(counterToMinutes())
-                .font(.custom("Avenir Next", size: 60))
+                .font(.questionNumberFont)
                 .fontWeight(.black)
         }
     }

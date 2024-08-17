@@ -82,7 +82,7 @@ struct QuizView: View {
             
             // Question
             if questionIndex >= 0 && questionIndex < questions.count {
-                questionlabel
+                questionLabel
             }
         }
         .padding(.xLarge)
@@ -99,16 +99,16 @@ struct QuizView: View {
 private extension QuizView {
 
     var questionNumberlabel: some View {
-        Text("\(questionIndex+1)")
+        Text("\(questionIndex+1).")
             .foregroundStyle(.black.opacity(0.25))
-            .font(.titleFont)
+            .font(.questionNumberFont)
     }
 
-    var questionlabel: some View {
+    var questionLabel: some View {
         Text(questions[questionIndex])
             .foregroundStyle(.black)
             .multilineTextAlignment(.center)
-            .font(.titleFont)
+            .font(.questionFont)
             .opacity(fadeAnimation ? 1 : 0)
             .animation(.easeInOut(duration: 0.5), value: fadeAnimation)
     }
@@ -130,7 +130,7 @@ private extension QuizView {
     var nextButton: some View {
         Button(action: didTapNextButton) {
             Text("NEXT")
-                .font(.headline)
+                .font(.buttonFont)
                 .foregroundColor(.black)
                 .padding([.leading, .trailing], .large)
                 .frame(height: 48)
