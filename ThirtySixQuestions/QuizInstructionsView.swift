@@ -31,11 +31,13 @@ private extension QuizInstructionsView {
     
     var titleLabel: some View {
         Text("Instructions")
+            .foregroundStyle(.black)
             .font(.title)
     }
     
     var instructionsLabel: some View {
         Text("Sit opposite your partner with your device between you. Take turns reading one question aloud to your partner, then both of you answer. There is no time limit, be honest and truthful.")
+            .foregroundStyle(.black)
             .font(.bodyFont)
             .multilineTextAlignment(.center)
     }

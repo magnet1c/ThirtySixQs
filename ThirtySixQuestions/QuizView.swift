@@ -90,6 +90,7 @@ private extension QuizView {
    
     var questionlabel: some View {
         Text(questions[questionIndex])
+            .foregroundStyle(.black)
             .rotationEffect(isEvenQuestion ? .degrees(0) : .degrees(-180))
             .font(.bodyFont)
             .opacity(fadeAnimation ? 1 : 0)
