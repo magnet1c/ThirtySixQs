@@ -34,7 +34,7 @@ struct HomeView: View {
 
             blurryBackgroundView
             
-            VStack(alignment: .leading, spacing: .medium) {
+            VStack(alignment: .center, spacing: .medium) {
                 logoView
                 Spacer()
                 quizButton
@@ -67,10 +67,28 @@ struct HomeView: View {
 private extension HomeView {
     
     var logoView: some View {
-        Image("36-questions-logo")
-            .resizable()
-            .scaledToFit()
-            .frame(height: 240)
+        VStack {
+            Image(systemName: "36.circle.fill")
+                .font(.system(size: 148, weight: .heavy, design: .default))
+                .foregroundStyle(
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color.white.opacity(0.74), Color.white.opacity(0.85)]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                
+                )
+                .shadow(radius: 20)
+            Text("Questions\nTo Fall In Love\nWith Anyone")
+                .font(.system(size: 36, weight: .heavy, design: .rounded))
+                .foregroundStyle(.white)
+                .multilineTextAlignment(.center)
+                .shadow(radius: 20)
+        }
+        //Image("36-questions-logo")
+        //    .resizable()
+        //    .scaledToFit()
+        //    .frame(height: 240)
     }
 
     var blurryBackgroundView: some View {
@@ -137,7 +155,8 @@ private extension HomeView {
     }
     
     var shareSheet: some View {
-        ShareSheet(items: ["Here is some text to share!", URL(string: "https://www.example.com")!])
+        ShareSheet(items: [
+            "I just took the 36 questions quiz with my partner. You should try it too!", URL(string: "https://apps.apple.com/gb/app/36-questions-to-fall-in-love-with-anyone/id961960090")!])
     }
 }
 

@@ -12,7 +12,7 @@ import SwiftUI
 struct QuizCompleteView: View {
 
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    private let timerTotalDuration: Int = 30 // 240 seconds = 4 minutes
+    private let timerTotalDuration: Int = 240 // 240 seconds = 4 minutes
     private let hapticsManager = HapticsManager()
 
     @State private var timerIsActive = false
@@ -55,7 +55,7 @@ struct QuizCompleteView: View {
                     dismiss()
                 }
             }
-            .padding(.xLarge)
+            .padding([.leading, .trailing], .xxLarge)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)
