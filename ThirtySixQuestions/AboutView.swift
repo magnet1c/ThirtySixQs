@@ -46,7 +46,7 @@ private extension AboutView {
     var navigationBar: some View {
         ZStack {
             Text("About")
-                .foregroundStyle(.black)
+                .foregroundStyle(.white.opacity(0.9))
                 .font(.titleFont)
                 .frame(height: 48)
             HStack {
@@ -62,7 +62,7 @@ private extension AboutView {
     var scrollingText: some View {
         ScrollView {
             Text(aboutText)
-                .foregroundStyle(.black)
+                .foregroundStyle(.white.opacity(0.75))
                 .font(.bodyFont)
                 .padding([.top, .bottom], .large)
                 .padding([.leading, .trailing], .xLarge)
@@ -87,8 +87,8 @@ private extension AboutView {
                 .offset(y: -80)
                 .rotationEffect(.degrees(90))
                 .blur(radius: 90)
-            VisualEffectView(effect: UIBlurEffect(style: .light))
-                .edgesIgnoringSafeArea(.all)
+            //VisualEffectView(effect: UIBlurEffect(style: .light))
+            //    .edgesIgnoringSafeArea(.all)
         }
     }
 }

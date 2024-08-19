@@ -18,6 +18,7 @@ struct QuizInstructionsView: View {
             ZStack {
                 blurryBackgroundView
                 VStack(spacing: .medium) {
+                    instructionsIcon
                     titleLabel
                     instructionsLabel
                     Spacer()
@@ -39,21 +40,27 @@ struct QuizInstructionsView: View {
 
 private extension QuizInstructionsView {
     
+    var instructionsIcon: some View {
+        Image(systemName: "heart.fill")
+            .foregroundStyle(.white.opacity(0.9))
+            .font(.largeIconFont)
+    }
+    
     var titleLabel: some View {
         Text("Instructions")
-            .foregroundStyle(.black)
+            .foregroundStyle(.white.opacity(0.9))
             .font(.titleFont)
     }
     
     var instructionsLabel: some View {
         Text("Sit opposite your partner with your device between you. Take turns reading one question aloud to your partner, then both of you answer.\n\nThere is no time limit, be honest and truthful.")
-            .foregroundStyle(.black)
+            .foregroundStyle(.white.opacity(0.75))
             .font(.bodyFont)
             .multilineTextAlignment(.center)
     }
     
     var startButton: some View {
-        TextButton(title: "WE'RE READY") {
+        TextButton(title: "WE'RE READY", icon: nil) {
             hapticsManager.generateSoftHaptic()
             startQuiz.toggle()
         }
@@ -77,8 +84,8 @@ private extension QuizInstructionsView {
                 .offset(y: -80)
                 .rotationEffect(.degrees(90))
                 .blur(radius: 90)
-            VisualEffectView(effect: UIBlurEffect(style: .light))
-                .edgesIgnoringSafeArea(.all)
+            //VisualEffectView(effect: UIBlurEffect(style: .light))
+             //   .edgesIgnoringSafeArea(.all)
         }
     }
 }

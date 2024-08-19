@@ -17,41 +17,48 @@ struct QuizCompleteView: View {
 
     @State private var timerIsActive = false
     @State private var counter: Int = 0
+    @State private var accent1Angle: Double = 0
+    @State private var accent2Angle: Double = 0
 
     var body: some View {
-        VStack(spacing: .medium) {
-            if timerIsActive {
-                // Countdown timer
-                ZStack{
-                    ProgressTrack()
-                    ProgressBar(counter: counter, countTo: timerTotalDuration)
-                    CountdownLabel(counter: counter, countTo: timerTotalDuration)
-                }
-            } else {
-                // Start timer content
-                titleLabel
-                instructionsLabel
-                Spacer()
-                    .frame(height: .small)
-                startTimeButton
-                skipButton
-            }
-        }
-        .onReceive(timer) { _ in
-            if timerIsActive && counter < timerTotalDuration {
-                self.counter += 1
-            } 
+        ZStack {
+            blurryBackgroundView
             
-            // Finished
-            if timerIsActive && counter >= timerTotalDuration {
-                hapticsManager.generateHeavyHaptic()
-                timerIsActive = false
-                dismiss()
+            VStack(spacing: .medium) {
+                if timerIsActive {
+                    // Countdown timer
+                    ZStack{
+                        ProgressTrack()
+                        ProgressBar(counter: counter, countTo: timerTotalDuration)
+                        CountdownLabel(counter: counter, countTo: timerTotalDuration)
+                    }
+                } else {
+                    // Start timer content
+                    instructionsIcon
+                    titleLabel
+                    instructionsLabel
+                    Spacer()
+                        .frame(height: .small)
+                    startTimeButton
+                    skipButton
+                }
             }
+            .onReceive(timer) { _ in
+                if timerIsActive && counter < timerTotalDuration {
+                    self.counter += 1
+                }
+                
+                // Finished
+                if timerIsActive && counter >= timerTotalDuration {
+                    hapticsManager.generateHeavyHaptic()
+                    timerIsActive = false
+                    dismiss()
+                }
+            }
+            .padding(.xLarge)
         }
-        .padding(.xLarge)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.green)
+        .background(Color.background)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
     }
@@ -61,21 +68,27 @@ struct QuizCompleteView: View {
 
 private extension QuizCompleteView {
     
+    var instructionsIcon: some View {
+        Image(systemName: "hands.clap.fill")
+            .foregroundStyle(.white.opacity(0.9))
+            .font(.largeIconFont)
+    }
+
     var titleLabel: some View {
         Text("Well done!")
-            .foregroundStyle(.black)
+            .foregroundStyle(.white.opacity(0.9))
             .font(.titleFont)
     }
     
     var instructionsLabel: some View {
         Text("You've reached the end of the questions. The final test is to stare into your partners eyes for four minutes.\n\nIt's important to finish with this step. Some people have described this step as thrilling and terrifying. Good luck...")
-            .foregroundStyle(.black)
+            .foregroundStyle(.white.opacity(0.75))
             .font(.bodyFont)
             .multilineTextAlignment(.center)
     }
 
     var startTimeButton: some View {
-        TextButton(title: "START TIMER", action: didTapStartTimer)
+        TextButton(title: "START TIMER", icon: nil, action: didTapStartTimer)
     }
     
     var skipButton: some View {
@@ -87,6 +100,41 @@ private extension QuizCompleteView {
                 .frame(height: 48)
         }
         .buttonStyle(PlainButtonStyle())
+    }
+
+    var blurryBackgroundView: some View {
+        ZStack {
+            Circle()
+                .fill(Color.accent1)
+                .frame(width: 370, height: 340)
+                .opacity(0.8)
+                .offset(x: -110)
+                .offset(y: 20)
+                .rotationEffect(.degrees(accent1Angle))
+                .onAppear {
+                    withAnimation(Animation.linear(duration: 30).repeatForever(autoreverses: false)) {
+                        accent1Angle = 360
+                    }
+                }
+                .blur(radius: 90)
+            
+            Circle()
+                .fill(Color.accent2)
+                .frame(width: 420, height: 400)
+                .opacity(0.8)
+                .offset(x: 150)
+                .offset(y: -80)
+                .rotationEffect(.degrees(accent2Angle))
+                .onAppear {
+                    withAnimation(Animation.linear(duration: 32).repeatForever(autoreverses: false)) {
+                        accent2Angle = 360
+                    }
+                }
+                .blur(radius: 90)
+            
+            //VisualEffectView(effect: UIBlurEffect(style: .light))
+              //  .edgesIgnoringSafeArea(.all)
+        }
     }
 }
 
@@ -123,7 +171,7 @@ struct CountdownLabel: View {
         VStack {
             Text(counterToMinutes())
                 .font(.questionNumberFont)
-                .fontWeight(.black)
+                .foregroundStyle(.white.opacity(0.9))
         }
     }
     

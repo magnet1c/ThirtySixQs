@@ -108,21 +108,29 @@ private extension HomeView {
     }
 
     var quizButton: some View {
-        TextButton(title: "START QUIZ", fullWidth: true) {
+        TextButton(title: "START QUIZ", icon: Image(systemName: "person.2.fill"), fullWidth: true) {
             hapticsManager.generateSoftHaptic()
             isQuizPresented.toggle()
         }
     }
     
     var aboutButton: some View {
-        TextButton(title: "ABOUT", fullWidth: true) {
+        TextButton(
+            title: "ABOUT",
+            icon: Image(systemName: "heart.text.square.fill"),
+            fullWidth: true
+        ) {
             hapticsManager.generateSoftHaptic()
             isAboutPresented.toggle()
         }
     }
     
     var tellAFriendButton: some View {
-        TextButton(title: "TELL A FRIEND", fullWidth: true) {
+        TextButton(
+            title: "TELL A FRIEND",
+            icon: Image(systemName: "square.and.arrow.up"),
+            fullWidth: true
+        ) {
             hapticsManager.generateSoftHaptic()
             isShareSheetPresented.toggle()
         }

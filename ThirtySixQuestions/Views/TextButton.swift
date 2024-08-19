@@ -10,16 +10,24 @@ import SwiftUI
 struct TextButton: View {
     
     let title: String
+    let icon: Image?
     var fullWidth: Bool = false
     let action: Action
 
     var body: some View {
         Button(action: action) {
-            Text(title)
-                .font(.buttonFont)
-                .foregroundColor(.black)
-                .padding([.leading, .trailing], .large)
-                .padding([.top, .bottom], .medium)
+            HStack {
+                icon
+                    .font(.buttonFont)
+                    .foregroundColor(.black)
+                Text(title)
+                    .font(.buttonFont)
+                    .foregroundColor(.black)
+                    
+            }
+            .padding([.leading, .trailing], .large)
+            .padding([.top, .bottom], .medium)
+            
                 .if(fullWidth) { view in
                     view.frame(maxWidth: .infinity)
                 }
@@ -40,7 +48,7 @@ struct TextButton: View {
 }
 
 #Preview {
-    TextButton(title: "START", fullWidth: false, action: {})
+    TextButton(title: "START", icon: nil, fullWidth: false, action: {})
 }
 
 extension View {

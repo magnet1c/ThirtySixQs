@@ -8,9 +8,10 @@
 import SwiftUI
 
 extension Font {
-    static let titleFont: Font = .custom("Georgia-Bold", size: 28)
-    static let bodyFont: Font = .custom("Georgia", size: 17)
+    static let titleFont: Font = .system(size: 28, weight: .heavy, design: .rounded)
+    static let bodyFont: Font = .system(size: 19, weight: .medium, design: .rounded)
+    static let largeIconFont: Font = .system(size: 48, weight: .heavy, design: .rounded)
     static let questionNumberFont: Font = .system(size: 64, weight: .heavy, design: .default)
-    static let questionFont: Font = .custom("Georgia-Bold", size: 32)
+    static let questionFont: Font = .system(size: 32, weight: .bold, design: .rounded)
     static let buttonFont: Font = .system(size: 17, weight: .heavy, design: .default)
 }

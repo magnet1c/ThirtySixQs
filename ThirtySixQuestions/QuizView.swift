@@ -100,8 +100,6 @@ struct QuizView: View {
                     .padding([.leading, .trailing], .xLarge)
             }
         }
-        //.padding([.leading, .trailing], .xLarge)
-        //.padding([.top, .bottom], .medium)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)
         .navigationBarHidden(true)
@@ -153,7 +151,7 @@ private extension QuizView {
     }
     
     var nextButton: some View {
-        TextButton(title: "NEXT", action: didTapNextButton)
+        TextButton(title: "NEXT", icon: nil, action: didTapNextButton)
             .disabled(questionIndex == questions.count)
     }
     
