@@ -120,7 +120,7 @@ private extension QuizView {
 
     var questionLabel: some View {
         Text(questions[questionIndex])
-            .foregroundStyle(.black)
+            .foregroundStyle(.black.opacity(0.8))
             .multilineTextAlignment(.center)
             .font(.questionFont)
             .opacity(fadeAnimation ? 1 : 0)

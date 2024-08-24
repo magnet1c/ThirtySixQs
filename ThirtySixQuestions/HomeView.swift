@@ -67,28 +67,26 @@ struct HomeView: View {
 private extension HomeView {
     
     var logoView: some View {
-        VStack {
-            Image(systemName: "36.circle.fill")
-                .font(.system(size: 148, weight: .heavy, design: .default))
-                .foregroundStyle(
-                    LinearGradient(
-                        gradient: Gradient(colors: [Color.white.opacity(0.74), Color.white.opacity(0.85)]),
-                        startPoint: .top,
-                        endPoint: .bottom
+        VStack(spacing: .medium) {
+            ZStack {
+                Circle()
+                    .foregroundStyle(.white)
+                    .frame(width: 160, height: 160)
+                Circle()
+                    .stroke(Color.accent1, lineWidth: 4)
+                    .frame(width: 140, height: 140)
+                Text("36")
+                    .font(.custom("HiraMinProN-W6", size: 72))
+                    .foregroundStyle(
+                        .accent1
                     )
-                
-                )
-                .shadow(radius: 20)
+            }
             Text("Questions\nTo Fall In Love\nWith Anyone")
-                .font(.system(size: 36, weight: .heavy, design: .rounded))
+                .font(.system(size: 36, weight: .heavy, design: .default))
                 .foregroundStyle(.white)
                 .multilineTextAlignment(.center)
-                .shadow(radius: 20)
+                .shadow(radius: 10)
         }
-        //Image("36-questions-logo")
-        //    .resizable()
-        //    .scaledToFit()
-        //    .frame(height: 240)
     }
 
     var blurryBackgroundView: some View {
